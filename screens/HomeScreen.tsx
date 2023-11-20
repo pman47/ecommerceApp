@@ -1,11 +1,16 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { Button, Text, TextInput, View } from "react-native";
+import { ApplicationContext } from "../ApplicationContext";
 import Colors from "../constants/Colors";
 
 interface HomeScreenProps {}
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
+  const { productsList } = useContext(ApplicationContext);
+
+  console.log("productsList ==>>", productsList);
+
   return (
     <View>
       <View

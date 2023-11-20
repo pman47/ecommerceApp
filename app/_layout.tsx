@@ -5,16 +5,14 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
-import { SplashScreen, Stack } from "expo-router";
+import { SplashScreen } from "expo-router";
 import { useEffect } from "react";
 import { useColorScheme } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import Colors from "../constants/Colors";
 import Navigator from "../navigation";
-import MainStackNavigator from "../navigation/MainStackNavigator";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
+export { ErrorBoundary } from "expo-router";
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
@@ -53,7 +51,11 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Navigator />
+      <SafeAreaProvider style={{ backgroundColor: Colors.background }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <Navigator />
+        </SafeAreaView>
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
