@@ -2,6 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { FC, useContext } from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { ApplicationContext } from "../ApplicationContext";
+import { ManropeText } from "../components/StyledText";
 import Colors from "../constants/Colors";
 
 interface HomeScreenProps {}
@@ -23,7 +24,10 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
         }}
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={{ color: Colors.white, fontSize: 25 }}>Hey, Manish</Text>
+          <ManropeText style={{ fontSize: 25, color: Colors.background }}>
+            Hey, Manish
+          </ManropeText>
+
           <FontAwesome
             name="info-circle"
             size={25}

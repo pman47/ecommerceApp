@@ -1,5 +1,11 @@
-import { Text, TextProps } from './Themed';
+import Colors from "../constants/Colors";
+import { Text, TextProps } from "./Themed";
 
-export function MonoText(props: TextProps) {
-  return <Text {...props} style={[props.style, { fontFamily: 'SpaceMono' }]} />;
+export function ManropeText(props: TextProps) {
+  return (
+    <Text
+      {...props}
+      style={[{ fontFamily: "Manrope", color: Colors.textColor }, props.style]}
+    />
+  );
 }
