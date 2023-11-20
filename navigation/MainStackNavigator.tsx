@@ -8,7 +8,8 @@ import ProductDetailsScreen from "../screens/ProductDetailsScreen";
 const MainStackNavigator = () => {
   const MainStack = createStackNavigator();
 
-  const [productsList, setProductsList] = useState<any[]>([]);
+  const [_productsList, _setProductsList] = useState<any[]>([]);
+  const [_cart, _setCart] = useState<any>({});
 
   return (
     <ApplicationContext.Provider value={getAppContext()}>
@@ -34,9 +35,31 @@ const MainStackNavigator = () => {
 
   function getAppContext(): IApplicationContext {
     return {
-      productsList: productsList,
+      productsList: _productsList,
       setProductsList: (products: any[]) => {
-        setProductsList(products);
+        _setProductsList(products);
+      },
+      productsInCart: _cart,
+      addProductToCart: (product) => {
+        const productId = product?.id;
+        if (!productId) return;
+        const updatedCart = { ..._cart };
+        updatedCart[productId].product = product;
+        updatedCart[productId].quantity =
+          parseInt(updatedCart[productId]?.quantity || "0") + 1;
+        _setCart(updatedCart);
+      },
+      removeProductFromCart: (product) => {
+        const productId = product?.id;
+        if (!productId) return;
+        const updatedCart = { ..._cart };
+        if (updatedCart[productId].quantity <= 1) {
+          delete updatedCart[productId];
+        } else {
+          updatedCart[productId].quantity =
+            parseInt(updatedCart[productId]?.quantity || "1") - 1;
+        }
+        _setCart(updatedCart);
       },
     };
   }
