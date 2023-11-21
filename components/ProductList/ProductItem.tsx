@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { Heart, Plus } from "lucide-react-native";
 import { FC, useContext, useMemo } from "react";
 import { View } from "react-native";
@@ -16,6 +17,7 @@ const MARGIN_VALUE = 5;
 
 const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
   const { addProductToCart } = useContext(ApplicationContext);
+  const navigation: any = useNavigation();
   const extraStyle = useMemo(() => {
     const value = index % 2;
     if (value) {
@@ -28,6 +30,12 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
 
   const handleAddToCart = () => {
     addProductToCart(product);
+  };
+
+  const navigateToProductDetails = () => {
+    navigation.navigate("ProductDetailsScreen", {
+      product: product,
+    });
   };
 
   return (
@@ -66,10 +74,12 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
       </View>
 
       {/* IMAGE */}
-      <Image
-        source={{ uri: product.thumbnail, cache: "only-if-cached" }}
-        resizeMode={"cover"}
-      />
+      <TouchableOpacity onPress={navigateToProductDetails}>
+        <Image
+          source={{ uri: product.thumbnail, cache: "only-if-cached" }}
+          resizeMode={"cover"}
+        />
+      </TouchableOpacity>
 
       {/* PRODUCT DETAILS */}
       <View>

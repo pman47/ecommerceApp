@@ -18,3 +18,11 @@ interface ProductResponse {
   skip: number;
   limit: number;
 }
+
+type MainStackParamList = {
+  Home: undefined;
+  ProductDetailsScreen: {
+    product: Product;
+  };
+  CartScreen: undefined;
+};

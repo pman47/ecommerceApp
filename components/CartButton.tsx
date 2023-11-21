@@ -2,13 +2,15 @@ import { FC } from "react";
 import { ShoppingBag, ShoppingBasket } from "lucide-react-native";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Colors from "../constants/Colors";
 
-interface CartButtonProps {}
+interface CartButtonProps {
+  variant?: "light" | "dark";
+}
 
-const CartButton: FC<CartButtonProps> = ({}) => {
+const CartButton: FC<CartButtonProps> = ({ variant = "light" }) => {
   const navigation: any = useNavigation();
   const navigateToCartScreen = () => {
-    console.log("HELLO");
     navigation.navigate("CartScreen");
   };
   return (
@@ -22,7 +24,10 @@ const CartButton: FC<CartButtonProps> = ({}) => {
         justifyContent: "center",
       }}
     >
-      <ShoppingBag size={25} color="white" />
+      <ShoppingBag
+        size={25}
+        color={variant === "light" ? "white" : Colors.black100}
+      />
     </TouchableOpacity>
   );
 };
