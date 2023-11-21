@@ -36,24 +36,27 @@ const MainStackNavigator = () => {
   function getAppContext(): IApplicationContext {
     return {
       productsList: _productsList,
-      setProductsList: (products: any[]) => {
+      setProductsList: (products: Product[]) => {
         _setProductsList(products);
       },
       productsInCart: _cart,
-      addProductToCart: (product) => {
+      addProductToCart: (product: Product) => {
         const productId = product?.id;
         if (!productId) return;
         const updatedCart = { ..._cart };
+        if (!updatedCart[productId]) {
+          updatedCart[productId] = {};
+        }
         updatedCart[productId].product = product;
         updatedCart[productId].quantity =
           parseInt(updatedCart[productId]?.quantity || "0") + 1;
         _setCart(updatedCart);
       },
-      removeProductFromCart: (product) => {
+      removeProductFromCart: (product: Product) => {
         const productId = product?.id;
         if (!productId) return;
         const updatedCart = { ..._cart };
-        if (updatedCart[productId].quantity <= 1) {
+        if (updatedCart[productId]?.quantity <= 1) {
           delete updatedCart[productId];
         } else {
           updatedCart[productId].quantity =
