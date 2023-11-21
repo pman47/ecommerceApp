@@ -1,4 +1,3 @@
-import { Plus } from "lucide-react-native";
 import {
   FC,
   useCallback,
@@ -7,11 +6,10 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Image, View } from "react-native";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { ApiClient } from "../../api/ApiClient";
 import { ApplicationContext } from "../../ApplicationContext";
-import Colors from "../../constants/Colors";
 import { ManropeText } from "../StyledText";
 import ProductItem from "./ProductItem";
 

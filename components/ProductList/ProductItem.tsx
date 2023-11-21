@@ -1,17 +1,11 @@
-import { View, Image } from "react-native";
-import {
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Plus } from "lucide-react-native";
+import { FC, useContext, useMemo } from "react";
+import { View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { ApplicationContext } from "../../ApplicationContext";
 import Colors from "../../constants/Colors";
+import Image from "../Image";
 import { ManropeText } from "../StyledText";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Plus } from "lucide-react-native";
 
 interface ProductItemProps {
   product: Product;
@@ -51,12 +45,6 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
       <Image
         source={{ uri: product.thumbnail, cache: "only-if-cached" }}
         resizeMode={"cover"}
-        style={{
-          width: "100%",
-          aspectRatio: 3 / 2,
-          borderRadius: 10,
-          backgroundColor: Colors.black20,
-        }}
       />
 
       {/* PRODUCT DETAILS */}
