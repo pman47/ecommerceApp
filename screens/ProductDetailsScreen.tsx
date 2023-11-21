@@ -3,6 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { FC, useState } from "react";
 import { View, Text } from "react-native";
 import StarRating from "react-native-star-rating-widget";
+import Carousel, { CarouselItem } from "../components/Carousel";
 import CartButton from "../components/CartButton";
 import GoBackButton from "../components/GoBackButton";
 import { ManropeText } from "../components/StyledText";
@@ -39,6 +40,11 @@ const Header = () => {
 };
 
 const ProductDetails = ({ product }: { product: Product }) => {
+  const imageArray: CarouselItem[] = product.images.map((imageUrl) => ({
+    id: imageUrl,
+    imageUrl,
+  }));
+
   return (
     <View>
       <View
@@ -88,6 +94,9 @@ const ProductDetails = ({ product }: { product: Product }) => {
         <ManropeText style={{ fontSize: 20, opacity: 0.5 }}>
           {Math.floor(Math.random() * 100)} Reviews
         </ManropeText>
+      </View>
+      <View style={{ marginVertical: 20 }}>
+        <Carousel data={imageArray} />
       </View>
     </View>
   );

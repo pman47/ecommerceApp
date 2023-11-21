@@ -37,18 +37,6 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
       <View style={styles.productListContainer}>
         <ProductList />
       </View>
-      {/* <Button
-        title="Buy Now"
-        onPress={() => {
-          navigation.navigate("ProductDetailsScreen");
-        }}
-      />
-      <Button
-        onPress={() => {
-          navigation.navigate("CartScreen");
-        }}
-        title="Add To Cart"
-      /> */}
     </View>
   );
 };
