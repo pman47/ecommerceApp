@@ -1,7 +1,6 @@
-import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Search } from "lucide-react-native";
 import { FC, useContext } from "react";
-import { Button, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, TextInput, View } from "react-native";
 import { ApplicationContext } from "../ApplicationContext";
 import CartButton from "../components/CartButton";
 import { ManropeText } from "../components/StyledText";
@@ -15,49 +14,15 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
 
   return (
     <View>
-      <View
-        style={{
-          backgroundColor: Colors.primary,
-          paddingVertical: 20,
-          paddingHorizontal: 20,
-          marginBottom: 20,
-          gap: 20,
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <ManropeText style={{ fontSize: 25, color: Colors.background }}>
-            Hey, Manish
-          </ManropeText>
+      <View style={styles.container}>
+        <View style={styles.introAndCart}>
+          <ManropeText style={styles.introText}>Hey, Manish</ManropeText>
           <CartButton />
         </View>
-        <View
-          style={{
-            marginTop: 20,
-            marginBottom: 10,
-            backgroundColor: Colors.primaryBlue,
-            borderRadius: 50,
-            paddingHorizontal: 30,
-            paddingVertical: 15,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 20,
-          }}
-        >
+        <View style={styles.searchBarContainer}>
           <Search size={20} color={Colors.white} />
           <TextInput
-            style={{
-              fontSize: 17,
-              color: Colors.white,
-              flex: 1,
-              fontFamily: FontFamily.Manrope,
-            }}
+            style={styles.textInput}
             placeholderTextColor={"rgba(255,255,255,0.5)"}
             placeholder={"Search Products or store"}
           />
@@ -80,3 +45,37 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primary,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    gap: 20,
+  },
+  introAndCart: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  introText: { fontSize: 25, color: Colors.background },
+  searchBarContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+    backgroundColor: Colors.primaryBlue,
+    borderRadius: 50,
+    paddingHorizontal: 30,
+    paddingVertical: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 20,
+  },
+  textInput: {
+    fontSize: 17,
+    color: Colors.white,
+    flex: 1,
+    fontFamily: FontFamily.Manrope,
+  },
+});
