@@ -17,6 +17,8 @@ const black60 = "#606D76";
 const black90 = "#354349";
 const black100 = "#1B262E";
 
+const heartColor = "#FF8181";
+
 export default {
   light: {
     text: textColor,
@@ -45,4 +47,5 @@ export default {
   black60,
   black90,
   black100,
+  heartColor,
 };

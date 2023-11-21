@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react-native";
+import { Heart, Plus } from "lucide-react-native";
 import { FC, useContext, useMemo } from "react";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -39,8 +39,32 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
         padding: 15,
         borderRadius: 15,
         gap: 10,
+        position: "relative",
       }}
     >
+      {/* Favourite Icon  */}
+      <View
+        style={{
+          position: "absolute",
+          top: 10,
+          left: 10,
+          zIndex: 10,
+        }}
+      >
+        <TouchableOpacity
+          style={{
+            height: 50,
+            width: 50,
+            backgroundColor: Colors.black1,
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottomEndRadius: 25,
+          }}
+        >
+          <Heart size={20} fill={Colors.heartColor} color={Colors.heartColor} />
+        </TouchableOpacity>
+      </View>
+
       {/* IMAGE */}
       <Image
         source={{ uri: product.thumbnail, cache: "only-if-cached" }}
