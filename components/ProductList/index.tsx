@@ -1,13 +1,13 @@
 import { Plus } from "lucide-react-native";
 import {
   FC,
-  useState,
   useCallback,
   useContext,
   useEffect,
   useMemo,
+  useState,
 } from "react";
-import { Text, View } from "react-native";
+import { Image, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { ApiClient } from "../../api/ApiClient";
 import { ApplicationContext } from "../../ApplicationContext";
@@ -82,7 +82,7 @@ const ProductList: FC<ProductListProps> = ({}) => {
 };
 
 const ProductItem = (props: { product: Product; index: number }) => {
-  const { productsInCart, addProductToCart } = useContext(ApplicationContext);
+  const { addProductToCart } = useContext(ApplicationContext);
   const { product, index } = props;
   const extraStyle = useMemo(() => {
     const value = index % 2;
@@ -95,11 +95,8 @@ const ProductItem = (props: { product: Product; index: number }) => {
   }, [index % 2]);
 
   const handleAddToCart = () => {
-    console.log("product ==>>", product);
     addProductToCart(product);
   };
-
-  console.log("productsInCart ==>>", productsInCart);
 
   return (
     <View
@@ -109,9 +106,20 @@ const ProductItem = (props: { product: Product; index: number }) => {
         backgroundColor: Colors.background,
         padding: 15,
         borderRadius: 15,
+        gap: 10,
       }}
     >
       {/* IMAGE */}
+      <Image
+        source={{ uri: product.thumbnail, cache: "only-if-cached" }}
+        resizeMode={"cover"}
+        style={{
+          width: "100%",
+          aspectRatio: 3 / 2,
+          borderRadius: 10,
+          backgroundColor: Colors.black20,
+        }}
+      />
 
       {/* PRODUCT DETAILS */}
       <View>

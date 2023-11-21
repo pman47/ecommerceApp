@@ -9,6 +9,14 @@ const white = "#fff";
 const textColor = "#1B262E";
 const textLightColor = "#354349";
 
+const black1 = "#F8F9FB";
+const black10 = "#E7ECF0";
+const black20 = "#C5CDD2";
+const black45 = "#A9B4BC";
+const black60 = "#606D76";
+const black90 = "#354349";
+const black100 = "#1B262E";
+
 export default {
   light: {
     text: textColor,
@@ -30,4 +38,11 @@ export default {
   textColor,
   textLightColor,
   white,
+  black1,
+  black10,
+  black20,
+  black45,
+  black60,
+  black90,
+  black100,
 };
