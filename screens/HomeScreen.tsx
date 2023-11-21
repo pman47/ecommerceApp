@@ -6,14 +6,20 @@ import CartButton from "../components/CartButton";
 import { ManropeText } from "../components/StyledText";
 import Colors from "../constants/Colors";
 import FontFamily from "../constants/FontFamily";
+import ProductList from "../components/ProductList";
 
 interface HomeScreenProps {}
 
 const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
-  const { productsList } = useContext(ApplicationContext);
-
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: Colors.primary,
+        margin: 0,
+        padding: 0,
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.introAndCart}>
           <ManropeText style={styles.introText}>Hey, Manish</ManropeText>
@@ -28,7 +34,10 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
           />
         </View>
       </View>
-      <Button
+      <View style={styles.productListContainer}>
+        <ProductList />
+      </View>
+      {/* <Button
         title="Buy Now"
         onPress={() => {
           navigation.navigate("ProductDetailsScreen");
@@ -39,7 +48,7 @@ const HomeScreen: FC<HomeScreenProps> = ({ navigation }: any) => {
           navigation.navigate("CartScreen");
         }}
         title="Add To Cart"
-      />
+      /> */}
     </View>
   );
 };
@@ -51,7 +60,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     paddingVertical: 20,
     paddingHorizontal: 20,
-    marginBottom: 20,
+    paddingBottom: 40,
     gap: 20,
   },
   introAndCart: {
@@ -77,5 +86,14 @@ const styles = StyleSheet.create({
     color: Colors.white,
     flex: 1,
     fontFamily: FontFamily.Manrope,
+  },
+  productListContainer: {
+    backgroundColor: Colors.white,
+    transform: [{ translateY: -30 }],
+    borderTopStartRadius: 30,
+    borderTopEndRadius: 30,
+    padding: 15,
+    marginBottom: -30,
+    flex: 1,
   },
 });
