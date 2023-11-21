@@ -40,14 +40,11 @@ const Header = () => {
 
 const ProductDetails = ({ product }: { product: Product }) => {
   return (
-    <View
-      style={{
-        paddingHorizontal: 30,
-      }}
-    >
+    <View>
       <View
         style={{
           marginTop: 20,
+          paddingHorizontal: 30,
         }}
       >
         <Text
@@ -75,6 +72,7 @@ const ProductDetails = ({ product }: { product: Product }) => {
           flexDirection: "row",
           alignItems: "center",
           gap: 10,
+          paddingHorizontal: 30,
         }}
       >
         <StarRating
