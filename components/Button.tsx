@@ -7,10 +7,11 @@ interface CustomButtonProps {
   title: string;
   onPress: () => void;
   variant?: "filled" | "outlined";
+  disabled?: boolean;
 }
 
 const CustomButton: FC<CustomButtonProps> = (props) => {
-  let { title, onPress, variant } = props;
+  let { title, onPress, variant, disabled } = props;
   if (!variant) variant = "filled";
 
   const [pressed, setPressed] = useState<boolean>(false);
@@ -20,11 +21,12 @@ const CustomButton: FC<CustomButtonProps> = (props) => {
       style={[
         styles.button,
         variant === "filled" ? styles.filled : styles.outlined,
-        { opacity: pressed ? 0.5 : 1 },
+        { opacity: pressed || disabled ? 0.5 : 1 },
       ]}
       onPress={onPress}
       onPressIn={() => setPressed(true)}
       onPressOut={() => setPressed(false)}
+      disabled={disabled}
     >
       <ManropeText
         style={[

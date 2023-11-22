@@ -43,6 +43,11 @@ const Checkout = () => {
     };
   }, [productsInCart]);
 
+  const productsAvailableInCart = useMemo(
+    () => Object.keys(productsInCart).length > 0,
+    [productsInCart]
+  );
+
   return (
     <View
       style={{
@@ -92,6 +97,7 @@ const Checkout = () => {
           title={"Proceed  To checkout"}
           onPress={() => {}}
           variant="filled"
+          disabled={!productsAvailableInCart}
         />
       </View>
     </View>
