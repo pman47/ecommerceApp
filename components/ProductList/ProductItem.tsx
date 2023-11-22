@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ApplicationContext } from "../../ApplicationContext";
 import Colors from "../../constants/Colors";
+import FavouriteIconButton from "../FavouriteIconButton";
 import Image from "../Image";
 import { ManropeText } from "../StyledText";
 
@@ -16,23 +17,11 @@ interface ProductItemProps {
 const MARGIN_VALUE = 5;
 
 const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
-  const {
-    addProductToCart,
-    productsInCart,
-    isFavouriteProduct,
-    addProductToFavourite,
-    removeProductFromFavourite,
-    favouriteProducts,
-  } = useContext(ApplicationContext);
+  const { addProductToCart, productsInCart } = useContext(ApplicationContext);
 
   const isProductAvailableInCart = useMemo(() => {
     return !!productsInCart[product.id];
   }, [productsInCart]);
-
-  const isCurrentProductFavourite = useMemo(
-    () => isFavouriteProduct(product.id),
-    [favouriteProducts]
-  );
 
   const navigation: any = useNavigation();
   const extraStyle = useMemo(() => {
@@ -55,14 +44,6 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
     });
   };
 
-  const handleFavouriteButtonPress = () => {
-    if (isCurrentProductFavourite) {
-      removeProductFromFavourite(product);
-    } else {
-      addProductToFavourite(product);
-    }
-  };
-
   return (
     <View
       style={{
@@ -82,29 +63,15 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
           top: 10,
           left: 10,
           zIndex: 10,
+          height: 50,
+          width: 50,
+          backgroundColor: Colors.black1,
+          justifyContent: "center",
+          alignItems: "center",
+          borderBottomEndRadius: 25,
         }}
       >
-        <TouchableOpacity
-          style={{
-            height: 50,
-            width: 50,
-            backgroundColor: Colors.black1,
-            justifyContent: "center",
-            alignItems: "center",
-            borderBottomEndRadius: 25,
-          }}
-          onPress={handleFavouriteButtonPress}
-        >
-          {isCurrentProductFavourite ? (
-            <Heart
-              size={20}
-              fill={Colors.heartColor}
-              color={Colors.heartColor}
-            />
-          ) : (
-            <Heart size={20} color={Colors.black90} />
-          )}
-        </TouchableOpacity>
+        <FavouriteIconButton product={product} />
       </View>
 
       {/* IMAGE */}
