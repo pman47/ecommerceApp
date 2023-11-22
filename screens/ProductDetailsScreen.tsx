@@ -42,7 +42,7 @@ const Header = () => {
 };
 
 const ProductDetails = ({ product }: { product: Product }) => {
-  const { addProductToCart } = useContext(ApplicationContext);
+  const { addProductToCart, productsInCart } = useContext(ApplicationContext);
   const imageArray: CarouselItem[] = product.images.map((imageUrl) => ({
     id: imageUrl,
     imageUrl,
@@ -73,6 +73,10 @@ const ProductDetails = ({ product }: { product: Product }) => {
   const navigateToCartScreen = () => {
     navigation.navigate("CartScreen");
   };
+
+  const isProductAvailableInCart = useMemo(() => {
+    return !!productsInCart[product.id];
+  }, [productsInCart]);
 
   return (
     <View
@@ -168,18 +172,31 @@ const ProductDetails = ({ product }: { product: Product }) => {
       {/* Add To Cart And Buy Now Button */}
       <View
         style={{
-          paddingHorizontal: 30,
           marginVertical: 20,
-          flexDirection: "row",
-          gap: 15,
+          gap: 8,
         }}
       >
-        <CustomButton
-          title="Add To Cart"
-          onPress={handleAddToCart}
-          variant={"outlined"}
-        />
-        <CustomButton title="Buy now" onPress={handleBuyNow} />
+        {isProductAvailableInCart && (
+          <ManropeText style={{ textAlign: "center", color: Colors.black60 }}>
+            Product is added to cart!
+          </ManropeText>
+        )}
+        <View
+          style={{
+            paddingHorizontal: 30,
+            flexDirection: "row",
+            gap: 15,
+          }}
+        >
+          {!isProductAvailableInCart && (
+            <CustomButton
+              title="Add To Cart"
+              onPress={handleAddToCart}
+              variant={"outlined"}
+            />
+          )}
+          <CustomButton title="Buy now" onPress={handleBuyNow} />
+        </View>
       </View>
 
       {/* Description */}

@@ -16,7 +16,12 @@ interface ProductItemProps {
 const MARGIN_VALUE = 5;
 
 const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
-  const { addProductToCart } = useContext(ApplicationContext);
+  const { addProductToCart, productsInCart } = useContext(ApplicationContext);
+
+  const isProductAvailableInCart = useMemo(() => {
+    return !!productsInCart[product.id];
+  }, [productsInCart]);
+
   const navigation: any = useNavigation();
   const extraStyle = useMemo(() => {
     const value = index % 2;
@@ -93,19 +98,21 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
           <ManropeText style={{ fontWeight: "bold", fontSize: 16 }}>
             ${product.price}
           </ManropeText>
-          <TouchableOpacity
-            style={{
-              height: 30,
-              width: 30,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: Colors.primary,
-              borderRadius: 15,
-            }}
-            onPress={handleAddToCart}
-          >
-            <Plus size={15} color={Colors.white} />
-          </TouchableOpacity>
+          {!isProductAvailableInCart && (
+            <TouchableOpacity
+              style={{
+                height: 30,
+                width: 30,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: Colors.primary,
+                borderRadius: 15,
+              }}
+              onPress={handleAddToCart}
+            >
+              <Plus size={15} color={Colors.white} />
+            </TouchableOpacity>
+          )}
         </View>
         <ManropeText
           style={{
