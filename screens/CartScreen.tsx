@@ -1,7 +1,8 @@
 import { Minus, Plus } from "lucide-react-native";
 import { FC, useContext, useMemo } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, ScrollView } from "react-native";
 import { ApplicationContext } from "../ApplicationContext";
+import CustomButton from "../components/Button";
 import GoBackButton from "../components/GoBackButton";
 import Image from "../components/Image";
 import { ManropeText } from "../components/StyledText";
@@ -14,6 +15,71 @@ const CartScreen: FC<CartScreenProps> = ({}) => {
     <View style={{ backgroundColor: Colors.white, flex: 1 }}>
       <Header />
       <CartItems />
+      <Checkout />
+    </View>
+  );
+};
+
+const Checkout = () => {
+  const { productsInCart } = useContext(ApplicationContext);
+
+  const data: any = {
+    Subtotal: 35.96,
+    Delivery: 2,
+    Total: 35.96,
+  };
+
+  return (
+    <View
+      style={{
+        backgroundColor: Colors.black1,
+        margin: 15,
+        padding: 15,
+        borderRadius: 40,
+      }}
+    >
+      <View
+        style={{
+          paddingHorizontal: 30,
+        }}
+      >
+        {Object.keys(data).map((title: string) => {
+          const value = data[title];
+          return (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: 5,
+              }}
+            >
+              <ManropeText style={{ color: Colors.black60 }}>
+                {title}
+              </ManropeText>
+              <ManropeText
+                style={{
+                  fontSize: 16,
+                }}
+              >
+                ${value}
+              </ManropeText>
+            </View>
+          );
+        })}
+      </View>
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: 20,
+        }}
+      >
+        <CustomButton
+          title={"Proceed  To checkout"}
+          onPress={() => {}}
+          variant="filled"
+        />
+      </View>
     </View>
   );
 };
@@ -114,7 +180,7 @@ const CartItems = () => {
   const productIds = Object.keys(productsInCart);
 
   return (
-    <View>
+    <ScrollView style={{ flex: 1 }}>
       {productIds.map((productId) => {
         return (
           <CartItem
@@ -123,7 +189,7 @@ const CartItems = () => {
           />
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 
