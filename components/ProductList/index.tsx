@@ -52,6 +52,33 @@ const ProductList: FC<ProductListProps> = ({}) => {
     [MARGIN_VALUE]
   );
 
+  const LoadProducts = () => {
+    if (!isLoading) {
+      return (
+        <ManropeText
+          style={{
+            textAlign: "center",
+            fontSize: 20,
+            marginTop: 50,
+          }}
+        >
+          Loading ...
+        </ManropeText>
+      );
+    }
+    return (
+      <FlatList
+        data={productsList}
+        renderItem={({ item, index }) => (
+          <ProductItem product={item} index={index} />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        ItemSeparatorComponent={memoizedItemSeparatorComponent}
+      />
+    );
+  };
+
   return (
     <View
       style={{
@@ -67,15 +94,7 @@ const ProductList: FC<ProductListProps> = ({}) => {
       >
         Products
       </ManropeText>
-      <FlatList
-        data={productsList}
-        renderItem={({ item, index }) => (
-          <ProductItem product={item} index={index} />
-        )}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        ItemSeparatorComponent={memoizedItemSeparatorComponent}
-      />
+      <LoadProducts />
     </View>
   );
 };

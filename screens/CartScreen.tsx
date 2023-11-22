@@ -72,6 +72,7 @@ const Checkout = () => {
                 alignItems: "center",
                 padding: 5,
               }}
+              key={title}
             >
               <ManropeText style={{ color: Colors.black60 }}>
                 {title}
