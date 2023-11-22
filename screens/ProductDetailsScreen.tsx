@@ -3,6 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { FC, useMemo, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import StarRating from "react-native-star-rating-widget";
+import CustomButton from "../components/Button";
 import Carousel, { CarouselItem } from "../components/Carousel";
 import CartButton from "../components/CartButton";
 import GoBackButton from "../components/GoBackButton";
@@ -148,11 +149,34 @@ const ProductDetails = ({ product }: { product: Product }) => {
         </ManropeText>
       </View>
 
+      {/* Add To Cart And Buy Now Button */}
+      <View
+        style={{
+          paddingHorizontal: 30,
+          marginVertical: 20,
+          flexDirection: "row",
+          gap: 15,
+        }}
+      >
+        <CustomButton
+          title="Add To Cart"
+          onPress={() => {
+            console.log("PRESSED");
+          }}
+          variant={"outlined"}
+        />
+        <CustomButton
+          title="Buy now"
+          onPress={() => {
+            console.log("PRESSED");
+          }}
+        />
+      </View>
+
       {/* Description */}
       <View
         style={{
           paddingHorizontal: 30,
-          marginTop: 10,
           flex: 1,
         }}
       >
