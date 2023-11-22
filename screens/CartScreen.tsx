@@ -1,6 +1,6 @@
 import { Minus, Plus } from "lucide-react-native";
 import { FC, useContext, useMemo } from "react";
-import { Text, TouchableOpacity, View, ScrollView } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { ApplicationContext } from "../ApplicationContext";
 import CustomButton from "../components/Button";
 import GoBackButton from "../components/GoBackButton";
@@ -23,11 +23,25 @@ const CartScreen: FC<CartScreenProps> = ({}) => {
 const Checkout = () => {
   const { productsInCart } = useContext(ApplicationContext);
 
-  const data: any = {
-    Subtotal: 35.96,
-    Delivery: 2,
-    Total: 35.96,
-  };
+  const data: any = useMemo(() => {
+    const allProductsIds = Object.keys(productsInCart);
+    let amount = 0;
+    allProductsIds.forEach((productId) => {
+      const { product, quantity } = productsInCart[productId];
+      const actualPrice = product.price;
+      const discount = actualPrice * (product.discountPercentage / 100);
+      const discountedPrice = actualPrice - discount;
+      amount += discountedPrice * parseInt(quantity);
+    });
+    const SubTotal = parseFloat(amount.toString()).toFixed(2).toString();
+    const Delivery = 2;
+    const Total = (parseInt(SubTotal) + Delivery).toString();
+    return {
+      Subtotal: SubTotal,
+      Delivery: Delivery,
+      Total: Total,
+    };
+  }, [productsInCart]);
 
   return (
     <View
