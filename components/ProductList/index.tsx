@@ -53,7 +53,7 @@ const ProductList: FC<ProductListProps> = ({}) => {
   );
 
   const LoadProducts = () => {
-    if (!isLoading) {
+    if (isLoading) {
       return (
         <ManropeText
           style={{
