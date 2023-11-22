@@ -80,8 +80,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+    flex: 1,
+    flexWrap: "wrap",
   },
-  productTitle: { fontSize: 20, color: Colors.black90 },
+  productTitle: { fontSize: 16, color: Colors.black90, flexWrap: "wrap" },
   productPrice: { color: Colors.black60 },
 
   // actions

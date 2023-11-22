@@ -73,7 +73,7 @@ const ProductDetails: FC<ProductDetailsProps> = ({ product }) => {
           rating={product.rating}
           onChange={() => {}}
           starSize={25}
-          style={styles.ratingContainer}
+          style={styles.starRating}
         />
         <ManropeText style={styles.reviews}>{totalReviews} Reviews</ManropeText>
       </View>
