@@ -1,6 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { View, Text } from "react-native";
 import StarRating from "react-native-star-rating-widget";
 import Carousel, { CarouselItem } from "../components/Carousel";
@@ -44,6 +44,18 @@ const ProductDetails = ({ product }: { product: Product }) => {
     id: imageUrl,
     imageUrl,
   }));
+
+  const { actualPrice, discount, discountedPrice } = useMemo(() => {
+    const actualPrice = product.price;
+    const discount = product.price * (product.discountPercentage / 100);
+    const discountedPrice = product.price - discount;
+
+    return {
+      actualPrice,
+      discount: parseFloat(discount.toFixed(2)).toString(),
+      discountedPrice: parseFloat(discountedPrice.toFixed(2)).toString(),
+    };
+  }, [product.price, product.discountPercentage]);
 
   return (
     <View>
@@ -97,6 +109,37 @@ const ProductDetails = ({ product }: { product: Product }) => {
       </View>
       <View style={{ marginVertical: 20 }}>
         <Carousel data={imageArray} />
+      </View>
+      <View
+        style={{
+          paddingHorizontal: 30,
+          flexDirection: "row",
+          alignItems: "flex-end",
+          gap: 15,
+        }}
+      >
+        <View>
+          <ManropeText
+            style={{ textDecorationLine: "line-through", fontSize: 12 }}
+          >
+            ${actualPrice}
+          </ManropeText>
+          <ManropeText style={{ fontWeight: "bold", fontSize: 20 }}>
+            ${discountedPrice}
+          </ManropeText>
+        </View>
+        <ManropeText
+          style={{
+            paddingHorizontal: 10,
+            paddingVertical: 5,
+            backgroundColor: Colors.primary,
+            borderRadius: 15,
+            color: Colors.white,
+            fontSize: 16,
+          }}
+        >
+          ${discount} OFF
+        </ManropeText>
       </View>
     </View>
   );
