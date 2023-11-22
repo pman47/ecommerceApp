@@ -60,12 +60,18 @@ const ProductDetails = ({ product }: { product: Product }) => {
     };
   }, [product.price, product.discountPercentage]);
 
+  const isProductAvailableInCart = useMemo(() => {
+    return !!productsInCart[product.id];
+  }, [productsInCart]);
+
   const handleAddToCart = () => {
     addProductToCart(product);
   };
 
   const handleBuyNow = () => {
-    addProductToCart(product);
+    if (!isProductAvailableInCart) {
+      addProductToCart(product);
+    }
     navigateToCartScreen();
   };
 
@@ -73,10 +79,6 @@ const ProductDetails = ({ product }: { product: Product }) => {
   const navigateToCartScreen = () => {
     navigation.navigate("CartScreen");
   };
-
-  const isProductAvailableInCart = useMemo(() => {
-    return !!productsInCart[product.id];
-  }, [productsInCart]);
 
   return (
     <View
