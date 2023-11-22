@@ -1,8 +1,9 @@
-import { RouteProp } from "@react-navigation/native";
+import { RouteProp, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo, useState, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
 import StarRating from "react-native-star-rating-widget";
+import { ApplicationContext } from "../ApplicationContext";
 import CustomButton from "../components/Button";
 import Carousel, { CarouselItem } from "../components/Carousel";
 import CartButton from "../components/CartButton";
@@ -41,6 +42,7 @@ const Header = () => {
 };
 
 const ProductDetails = ({ product }: { product: Product }) => {
+  const { addProductToCart } = useContext(ApplicationContext);
   const imageArray: CarouselItem[] = product.images.map((imageUrl) => ({
     id: imageUrl,
     imageUrl,
@@ -57,6 +59,20 @@ const ProductDetails = ({ product }: { product: Product }) => {
       discountedPrice: parseFloat(discountedPrice.toFixed(2)).toString(),
     };
   }, [product.price, product.discountPercentage]);
+
+  const handleAddToCart = () => {
+    addProductToCart(product);
+  };
+
+  const handleBuyNow = () => {
+    addProductToCart(product);
+    navigateToCartScreen();
+  };
+
+  const navigation: any = useNavigation();
+  const navigateToCartScreen = () => {
+    navigation.navigate("CartScreen");
+  };
 
   return (
     <View
@@ -160,17 +176,10 @@ const ProductDetails = ({ product }: { product: Product }) => {
       >
         <CustomButton
           title="Add To Cart"
-          onPress={() => {
-            console.log("PRESSED");
-          }}
+          onPress={handleAddToCart}
           variant={"outlined"}
         />
-        <CustomButton
-          title="Buy now"
-          onPress={() => {
-            console.log("PRESSED");
-          }}
-        />
+        <CustomButton title="Buy now" onPress={handleBuyNow} />
       </View>
 
       {/* Description */}
