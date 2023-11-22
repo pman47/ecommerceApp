@@ -30,8 +30,8 @@ const CartButton: FC<CartButtonProps> = ({ variant = "light" }) => {
           size={25}
           color={variant === "light" ? "white" : Colors.black100}
         />
+        <Text style={styles.countText}>{count}</Text>
       </TouchableOpacity>
-      <Text style={styles.countText}>{count}</Text>
     </View>
   );
 };
