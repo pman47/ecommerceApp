@@ -16,11 +16,23 @@ interface ProductItemProps {
 const MARGIN_VALUE = 5;
 
 const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
-  const { addProductToCart, productsInCart } = useContext(ApplicationContext);
+  const {
+    addProductToCart,
+    productsInCart,
+    isFavouriteProduct,
+    addProductToFavourite,
+    removeProductFromFavourite,
+    favouriteProducts,
+  } = useContext(ApplicationContext);
 
   const isProductAvailableInCart = useMemo(() => {
     return !!productsInCart[product.id];
   }, [productsInCart]);
+
+  const isCurrentProductFavourite = useMemo(
+    () => isFavouriteProduct(product.id),
+    [favouriteProducts]
+  );
 
   const navigation: any = useNavigation();
   const extraStyle = useMemo(() => {
@@ -41,6 +53,14 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
     navigation.navigate("ProductDetailsScreen", {
       product: product,
     });
+  };
+
+  const handleFavouriteButtonPress = () => {
+    if (isCurrentProductFavourite) {
+      removeProductFromFavourite(product);
+    } else {
+      addProductToFavourite(product);
+    }
   };
 
   return (
@@ -73,8 +93,17 @@ const ProductItem: FC<ProductItemProps> = ({ product, index }) => {
             alignItems: "center",
             borderBottomEndRadius: 25,
           }}
+          onPress={handleFavouriteButtonPress}
         >
-          <Heart size={20} fill={Colors.heartColor} color={Colors.heartColor} />
+          {isCurrentProductFavourite ? (
+            <Heart
+              size={20}
+              fill={Colors.heartColor}
+              color={Colors.heartColor}
+            />
+          ) : (
+            <Heart size={20} color={Colors.black90} />
+          )}
         </TouchableOpacity>
       </View>
 

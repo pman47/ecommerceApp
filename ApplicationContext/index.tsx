@@ -5,10 +5,18 @@ export const ApplicationContext = React.createContext<IApplicationContext>(
 );
 
 export interface IApplicationContext {
-  productsList: any[];
+  // Products
+  productsList: Product[];
   setProductsList: (products: Product[]) => void;
 
+  // CartItems
   productsInCart: any;
   addProductToCart: (product: Product) => void;
   removeProductFromCart: (product: Product) => void;
+
+  // Favourite Items
+  favouriteProducts: number[];
+  addProductToFavourite: (product: Product) => void;
+  removeProductFromFavourite: (product: Product) => void;
+  isFavouriteProduct: (productId: number) => boolean;
 }

@@ -10,6 +10,7 @@ const MainStackNavigator = () => {
 
   const [_productsList, _setProductsList] = useState<any[]>([]);
   const [_cart, _setCart] = useState<any>({});
+  const [_favourite, _setFavourite] = useState<number[]>([]);
 
   return (
     <ApplicationContext.Provider value={getAppContext()}>
@@ -63,6 +64,20 @@ const MainStackNavigator = () => {
             parseInt(updatedCart[productId]?.quantity || "1") - 1;
         }
         _setCart(updatedCart);
+      },
+      favouriteProducts: _favourite,
+      addProductToFavourite: (product: Product) => {
+        const productId = product.id;
+        if (_favourite.includes(productId)) return;
+        _setFavourite((favourite) => [...favourite, productId]);
+      },
+      removeProductFromFavourite: (product: Product) => {
+        const productId = product.id;
+        if (!_favourite.includes(productId)) return;
+        _setFavourite((favourite) => favourite.filter((e) => e !== productId));
+      },
+      isFavouriteProduct: (productId: number) => {
+        return _favourite.includes(productId);
       },
     };
   }
