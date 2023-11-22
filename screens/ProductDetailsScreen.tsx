@@ -1,7 +1,7 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FC, useMemo, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import StarRating from "react-native-star-rating-widget";
 import Carousel, { CarouselItem } from "../components/Carousel";
 import CartButton from "../components/CartButton";
@@ -58,7 +58,11 @@ const ProductDetails = ({ product }: { product: Product }) => {
   }, [product.price, product.discountPercentage]);
 
   return (
-    <View>
+    <View
+      style={{
+        flex: 1,
+      }}
+    >
       <View
         style={{
           marginTop: 20,
@@ -110,6 +114,8 @@ const ProductDetails = ({ product }: { product: Product }) => {
       <View style={{ marginVertical: 20 }}>
         <Carousel data={imageArray} />
       </View>
+
+      {/* Pricing Section */}
       <View
         style={{
           paddingHorizontal: 30,
@@ -140,6 +146,32 @@ const ProductDetails = ({ product }: { product: Product }) => {
         >
           ${discount} OFF
         </ManropeText>
+      </View>
+
+      {/* Description */}
+      <View
+        style={{
+          paddingHorizontal: 30,
+          marginTop: 10,
+          flex: 1,
+        }}
+      >
+        <ManropeText style={{ fontSize: 25 }}>Details</ManropeText>
+        <ScrollView
+          style={{
+            flex: 1,
+            marginBottom: 30,
+          }}
+        >
+          <ManropeText
+            style={{
+              fontSize: 18,
+              color: Colors.black60,
+            }}
+          >
+            {product.description}
+          </ManropeText>
+        </ScrollView>
       </View>
     </View>
   );
