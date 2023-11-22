@@ -7,6 +7,7 @@ import { ApplicationContext } from "../ApplicationContext";
 import CustomButton from "../components/Button";
 import Carousel, { CarouselItem } from "../components/Carousel";
 import CartButton from "../components/CartButton";
+import FavouriteIconButton from "../components/FavouriteIconButton";
 import GoBackButton from "../components/GoBackButton";
 import { ManropeText } from "../components/StyledText";
 import Colors from "../constants/Colors";
@@ -135,6 +136,20 @@ const ProductDetails = ({ product }: { product: Product }) => {
         </ManropeText>
       </View>
       <View style={{ marginVertical: 20 }}>
+        <View
+          style={{
+            position: "absolute",
+            top: 15,
+            right: 15,
+            zIndex: 10,
+            height: 50,
+            width: 50,
+            borderRadius: 15,
+            backgroundColor: Colors.black1,
+          }}
+        >
+          <FavouriteIconButton product={product} />
+        </View>
         <Carousel data={imageArray} />
       </View>
 
